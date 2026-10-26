@@ -1,0 +1,300 @@
+/* copilot-mem: GitHub Primer theme (primer/primitives, MIT). Injected into the
+   built viewer pages by rebrand-engine.mjs, after the engine's own tokens. */
+
+/* ---- viewer (/viewer, /tv) ---------------------------------------------- */
+:root, [data-theme="light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f6f8fa;
+  --color-bg-tertiary: #f6f8fa;
+  --color-bg-header: #f6f8fa;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f6f8fa;
+  --color-bg-input: #ffffff;
+  --color-bg-button: #1f883d;
+  --color-bg-button-hover: #1c8139;
+  --color-bg-button-active: #197935;
+  --color-bg-summary: #fff8c5;
+  --color-bg-prompt: #fbefff;
+  --color-bg-observation: #ddf4ff;
+  --color-bg-stat: #f6f8fa;
+  --color-bg-scrollbar-track: #ffffff;
+  --color-bg-scrollbar-thumb: #d1d9e0;
+  --color-bg-scrollbar-thumb-hover: #afb8c1;
+  --color-border-primary: #d1d9e0;
+  --color-border-secondary: #d8dee4;
+  --color-border-hover: #0969da;
+  --color-border-focus: #0969da;
+  --color-border-summary: #d4a72c;
+  --color-border-summary-hover: #bf8700;
+  --color-border-prompt: #8250df;
+  --color-border-prompt-hover: #6639ba;
+  --color-border-observation: #0969da;
+  --color-border-observation-hover: #0550ae;
+  --color-text-primary: #1f2328;
+  --color-text-secondary: #59636e;
+  --color-text-tertiary: #59636e;
+  --color-text-muted: #59636e;
+  --color-text-header: #1f2328;
+  --color-text-title: #1f2328;
+  --color-text-subtitle: #59636e;
+  --color-text-button: #ffffff;
+  --color-text-summary: #9a6700;
+  --color-text-observation: #1f2328;
+  --color-text-logo: #1f2328;
+  --color-accent-primary: #0969da;
+  --color-accent-focus: #0969da;
+  --color-accent-success: #1a7f37;
+  --color-accent-error: #d1242f;
+  --color-accent-summary: #9a6700;
+  --color-accent-prompt: #8250df;
+  --color-accent-observation: #0969da;
+  --color-type-badge-bg: #ddf4ff;
+  --color-type-badge-text: #0969da;
+  --color-summary-badge-bg: #fff8c5;
+  --color-summary-badge-text: #9a6700;
+  --color-prompt-badge-bg: #fbefff;
+  --color-prompt-badge-text: #8250df;
+  --color-observation-badge-bg: #ddf4ff;
+  --color-observation-badge-text: #0550ae;
+  --color-skeleton-base: #eff2f5;
+  --color-skeleton-highlight: #f6f8fa;
+  --shadow-focus: 0 0 0 2px #0969da;
+  --color-log-debug: #59636e;
+  --color-log-info: #0969da;
+  --color-log-warn: #9a6700;
+  --color-log-error: #d1242f;
+  --color-log-success: #1a7f37;
+  --color-log-component: #8250df;
+  --gh-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  --gh-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-terminal: var(--gh-mono);
+}
+
+[data-theme="dark"] {
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #151b23;
+  --color-bg-tertiary: #010409;
+  --color-bg-header: #010409;
+  --color-bg-card: #151b23;
+  --color-bg-card-hover: #212830;
+  --color-bg-input: #0d1117;
+  --color-bg-button: #238636;
+  --color-bg-button-hover: #29903b;
+  --color-bg-button-active: #2e9a40;
+  --color-bg-summary: #272115;
+  --color-bg-prompt: #221a33;
+  --color-bg-observation: #121d2f;
+  --color-bg-stat: #151b23;
+  --color-bg-scrollbar-track: #0d1117;
+  --color-bg-scrollbar-thumb: #3d444d;
+  --color-bg-scrollbar-thumb-hover: #656c76;
+  --color-border-primary: #3d444d;
+  --color-border-secondary: #262c36;
+  --color-border-hover: #656c76;
+  --color-border-focus: #1f6feb;
+  --color-border-summary: #9e6a03;
+  --color-border-summary-hover: #bb8009;
+  --color-border-prompt: #8957e5;
+  --color-border-prompt-hover: #a371f7;
+  --color-border-observation: #1f6feb;
+  --color-border-observation-hover: #4493f8;
+  --color-text-primary: #f0f6fc;
+  --color-text-secondary: #9198a1;
+  --color-text-tertiary: #9198a1;
+  --color-text-muted: #9198a1;
+  --color-text-header: #f0f6fc;
+  --color-text-title: #f0f6fc;
+  --color-text-subtitle: #9198a1;
+  --color-text-button: #ffffff;
+  --color-text-summary: #d29922;
+  --color-text-observation: #d1d7e0;
+  --color-text-logo: #f0f6fc;
+  --color-accent-primary: #4493f8;
+  --color-accent-focus: #1f6feb;
+  --color-accent-success: #3fb950;
+  --color-accent-error: #f85149;
+  --color-accent-summary: #d29922;
+  --color-accent-prompt: #ab7df8;
+  --color-accent-observation: #4493f8;
+  --color-type-badge-bg: rgba(56, 139, 253, 0.15);
+  --color-type-badge-text: #4493f8;
+  --color-summary-badge-bg: rgba(187, 128, 9, 0.15);
+  --color-summary-badge-text: #d29922;
+  --color-prompt-badge-bg: rgba(171, 125, 248, 0.15);
+  --color-prompt-badge-text: #ab7df8;
+  --color-observation-badge-bg: rgba(56, 139, 253, 0.15);
+  --color-observation-badge-text: #4493f8;
+  --color-skeleton-base: #212830;
+  --color-skeleton-highlight: #2a313c;
+  --shadow-focus: 0 0 0 2px #1f6feb;
+  --color-log-debug: #9198a1;
+  --color-log-info: #4493f8;
+  --color-log-warn: #d29922;
+  --color-log-error: #f85149;
+  --color-log-success: #3fb950;
+  --color-log-component: #ab7df8;
+}
+
+/* System dark before the app sets data-theme: mirrors [data-theme="dark"]. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg-primary: #0d1117;
+    --color-bg-secondary: #151b23;
+    --color-bg-tertiary: #010409;
+    --color-bg-header: #010409;
+    --color-bg-card: #151b23;
+    --color-bg-card-hover: #212830;
+    --color-bg-input: #0d1117;
+    --color-bg-button: #238636;
+    --color-bg-button-hover: #29903b;
+    --color-bg-button-active: #2e9a40;
+    --color-bg-summary: #272115;
+    --color-bg-prompt: #221a33;
+    --color-bg-observation: #121d2f;
+    --color-bg-stat: #151b23;
+    --color-bg-scrollbar-track: #0d1117;
+    --color-bg-scrollbar-thumb: #3d444d;
+    --color-bg-scrollbar-thumb-hover: #656c76;
+    --color-border-primary: #3d444d;
+    --color-border-secondary: #262c36;
+    --color-border-hover: #656c76;
+    --color-border-focus: #1f6feb;
+    --color-border-summary: #9e6a03;
+    --color-border-summary-hover: #bb8009;
+    --color-border-prompt: #8957e5;
+    --color-border-prompt-hover: #a371f7;
+    --color-border-observation: #1f6feb;
+    --color-border-observation-hover: #4493f8;
+    --color-text-primary: #f0f6fc;
+    --color-text-secondary: #9198a1;
+    --color-text-tertiary: #9198a1;
+    --color-text-muted: #9198a1;
+    --color-text-header: #f0f6fc;
+    --color-text-title: #f0f6fc;
+    --color-text-subtitle: #9198a1;
+    --color-text-button: #ffffff;
+    --color-text-summary: #d29922;
+    --color-text-observation: #d1d7e0;
+    --color-text-logo: #f0f6fc;
+    --color-accent-primary: #4493f8;
+    --color-accent-focus: #1f6feb;
+    --color-accent-success: #3fb950;
+    --color-accent-error: #f85149;
+    --color-accent-summary: #d29922;
+    --color-accent-prompt: #ab7df8;
+    --color-accent-observation: #4493f8;
+    --color-type-badge-bg: rgba(56, 139, 253, 0.15);
+    --color-type-badge-text: #4493f8;
+    --color-summary-badge-bg: rgba(187, 128, 9, 0.15);
+    --color-summary-badge-text: #d29922;
+    --color-prompt-badge-bg: rgba(171, 125, 248, 0.15);
+    --color-prompt-badge-text: #ab7df8;
+    --color-observation-badge-bg: rgba(56, 139, 253, 0.15);
+    --color-observation-badge-text: #4493f8;
+    --color-skeleton-base: #212830;
+    --color-skeleton-highlight: #2a313c;
+    --shadow-focus: 0 0 0 2px #1f6feb;
+    --color-log-debug: #9198a1;
+    --color-log-info: #4493f8;
+    --color-log-warn: #d29922;
+    --color-log-error: #f85149;
+    --color-log-success: #3fb950;
+    --color-log-component: #ab7df8;
+  }
+}
+
+body { font-family: var(--gh-font) !important; }
+code, pre, kbd, samp, .terminal, .log-line-raw { font-family: var(--gh-mono) !important; }
+/* GitHub-style flat header instead of the gradient */
+.header { background: var(--color-bg-header) !important; backdrop-filter: none !important; box-shadow: none !important; }
+.logomark { color: var(--color-text-logo); }
+/* links to cloud services / social accounts: not part of a local tool */
+.pro-trial-cta, .teambrain-cta, .icon-link { display: none !important; }
+
+/* ---- My Work (/) — shadcn tokens ------------------------------------------ */
+:root {
+  --background: #f6f8fa;
+  --foreground: #1f2328;
+  --card: #ffffff;
+  --card-foreground: #1f2328;
+  --popover: #ffffff;
+  --popover-foreground: #1f2328;
+  --primary: #0969da;
+  --primary-bright: #218bff;
+  --primary-deep: #0550ae;
+  --primary-foreground: #ffffff;
+  --secondary: #f6f8fa;
+  --secondary-foreground: #1f2328;
+  --muted: #f6f8fa;
+  --muted-foreground: #59636e;
+  --accent: #ddf4ff;
+  --accent-foreground: #0550ae;
+  --accent-border: #b6e3ff;
+  --destructive: #d1242f;
+  --border: #d1d9e0;
+  --input: #d1d9e0;
+  --ring: #0969da;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1f2328;
+  --sidebar-primary: #0969da;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ddf4ff;
+  --sidebar-accent-foreground: #0550ae;
+  --sidebar-border: #d1d9e0;
+  --sidebar-ring: #0969da;
+  --surface: #f6f8fa;
+  --surface-warm: #ffffff;
+  --surface-cool: #f6f8fa;
+  --popover-shadow: 0 1px 3px rgba(31, 35, 40, 0.12), 0 8px 24px rgba(66, 74, 83, 0.12);
+  --primary-shadow: 0 1px 0 rgba(31, 35, 40, 0.1);
+}
+.dark {
+  --background: #0d1117;
+  --foreground: #f0f6fc;
+  --card: #151b23;
+  --card-foreground: #f0f6fc;
+  --popover: #151b23;
+  --popover-foreground: #f0f6fc;
+  --primary: #1f6feb;
+  --primary-bright: #4493f8;
+  --primary-deep: #1158c7;
+  --primary-foreground: #ffffff;
+  --secondary: #212830;
+  --secondary-foreground: #f0f6fc;
+  --muted: #212830;
+  --muted-foreground: #9198a1;
+  --accent: #121d2f;
+  --accent-foreground: #4493f8;
+  --accent-border: #183b6b;
+  --destructive: #f85149;
+  --border: #3d444d;
+  --input: #3d444d;
+  --ring: #1f6feb;
+  --sidebar: #010409;
+  --sidebar-foreground: #f0f6fc;
+  --sidebar-primary: #4493f8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #121d2f;
+  --sidebar-accent-foreground: #4493f8;
+  --sidebar-border: #3d444d;
+  --sidebar-ring: #1f6feb;
+  --surface: #151b23;
+  --surface-warm: #151b23;
+  --surface-cool: #0d1117;
+  --popover-shadow: 0 0 0 1px #3d444d, 0 8px 24px rgba(1, 4, 9, 0.75);
+  --primary-shadow: 0 1px 0 rgba(1, 4, 9, 0.4);
+}
+
+/* flat GitHub canvas: no orange haze or paper grain */
+:root, .dark { --haze-a: transparent; --haze-b: transparent; --haze-c: transparent; --grain: none; }
+
+/* brand mark: the orange logo becomes the Copilot octicon */
+.text-\[\#D86441\] { display: none !important; }
+span:has(> .text-\[\#D86441\])::before {
+  content: ""; display: inline-block; width: 2rem; height: 2rem;
+  background-color: var(--foreground);
+  -webkit-mask: url(/copilot.svg) center / contain no-repeat; mask: url(/copilot.svg) center / contain no-repeat;
+}
+
+/* GitHub star counter and the TeamBrain (cloud plan) switch */
+a[aria-label$="on GitHub"], button:has(> .lucide-users) { display: none !important; }
