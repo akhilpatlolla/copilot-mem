@@ -8,10 +8,10 @@
 
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, readdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ENGINE = join(dirname(fileURLToPath(import.meta.url)), 'engine');
+const ENGINE = resolve(process.env.COPILOT_MEM_ENGINE_DIR || join(dirname(fileURLToPath(import.meta.url)), 'engine'));
 const SKIP = new Set(['.git', 'node_modules']);
 const CASE = { claude: 'copilot', Claude: 'Copilot', CLAUDE: 'COPILOT' };
 const RE = /(claude|Claude|CLAUDE)([-_ ]?)(mem|Mem|MEM)/g;

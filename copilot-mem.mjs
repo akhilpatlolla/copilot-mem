@@ -16,7 +16,11 @@ import { fileURLToPath } from 'node:url';
 
 const SELF = fileURLToPath(import.meta.url);
 const DATA = process.env.COPILOT_MEM_DATA_DIR || join(homedir(), '.copilot-mem');
-const ENGINE = process.env.COPILOT_MEM_ENGINE || join(dirname(SELF), 'engine', 'plugin');
+// Engine: next to this script (git clone + ./setup.sh), else in the data dir
+// (plugin install + `copilot-mem.mjs setup`).
+const ENGINE = process.env.COPILOT_MEM_ENGINE
+  || [join(dirname(SELF), 'engine', 'plugin'), join(DATA, 'engine', 'plugin')].find((d) => existsSync(join(d, 'scripts', 'worker-service.cjs')))
+  || join(DATA, 'engine', 'plugin');
 const WORKER = join(ENGINE, 'scripts', 'worker-service.cjs');
 const COPILOT_SETTINGS = join(homedir(), '.copilot', 'settings.json');
 
@@ -252,7 +256,14 @@ async function hook(event) {
   // Memory must never break the agent: every path exits 0 with valid JSON.
   try {
     const engineEvent = HOOK_EVENTS[event];
-    if (!engineEvent || !existsSync(WORKER)) return print({});
+    if (!engineEvent) return print({});
+    // Installed both as a plugin and via settings.json: let settings.json win.
+    if (process.env.COPILOT_PLUGIN_ROOT && settingsHasHooks()) return print({});
+    if (!existsSync(WORKER)) {
+      return print(event === 'SessionStart'
+        ? { additionalContext: `copilot-mem is installed but not set up yet, so nothing is being remembered. Tell the user to run this once: node "${SELF}" setup` }
+        : {});
+    }
     const raw = await readStdin();
     const payload = await adaptPayload(event, JSON.parse(raw || '{}'));
     const env = engineEnv();
@@ -360,6 +371,18 @@ export function migrateData(dir = DATA) {
   try { const s = readFileSync(sp, 'utf8'), t = s.replace(OLD, NEW); if (t !== s) writeFileSync(sp, t); } catch {}
 }
 
+function settingsHasHooks() {
+  try { return JSON.stringify(JSON.parse(readFileSync(COPILOT_SETTINGS, 'utf8')).hooks ?? {}).includes('copilot-mem'); } catch { return false; }
+}
+
+// For plugin installs: build the engine into the data dir with setup.sh.
+function setup() {
+  const r = spawnSync('bash', [join(dirname(SELF), 'setup.sh')], {
+    stdio: 'inherit', env: { ...process.env, COPILOT_MEM_ENGINE_DIR: join(DATA, 'engine'), SKIP_INSTALL: '1' },
+  });
+  process.exit(r.status ?? 1);
+}
+
 function install() {
   if (!existsSync(WORKER)) throw new Error(`engine not found at ${ENGINE}`);
   mkdirSync(join(DATA, 'host'), { recursive: true });
@@ -455,6 +478,7 @@ switch (cmd) {
   case 'search': case 'timeline': case 'get': case 'save':
     try { await memoryCommand(cmd, rest); } catch (e) { console.error(e.message); process.exit(1); }
     break;
+  case 'setup': setup(); break;
   case 'install': install(); break;
   case 'uninstall': uninstall(); break;
   case 'doctor': await doctor(); break;
@@ -464,5 +488,5 @@ switch (cmd) {
     process.stdout.write(rebrand(r.stdout)); process.stderr.write(rebrand(r.stderr)); process.exit(r.status ?? 1);
   }
   default:
-    console.log('usage: copilot-mem install | uninstall | doctor | selftest | start | stop | restart | status\n       copilot-mem search "<query>" | timeline <ID> | get <ID>... | save "<note>"');
+    console.log('usage: copilot-mem setup | install | uninstall | doctor | selftest | start | stop | restart | status\n       copilot-mem search "<query>" | timeline <ID> | get <ID>... | save "<note>"');
 }

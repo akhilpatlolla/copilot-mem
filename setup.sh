@@ -4,13 +4,16 @@
 # Safe to re-run; it rebuilds engine/ from scratch every time.
 #
 #   ./setup.sh                 full setup
-#   SKIP_INSTALL=1 ./setup.sh  build only (don't touch ~/.copilot/settings.json)
+#   SKIP_INSTALL=1 ./setup.sh  build only (don't touch ~/.copilot/settings.json);
+#                              used by `copilot-mem.mjs setup` for plugin installs
 set -euo pipefail
 cd "$(dirname "$0")"
 
 ENGINE_REPO=https://github.com/thedotmack/claude-mem
 ENGINE_REV=d9b36b66dc68da92af9df238e4c4debab587ba62   # v15.2.1
 MODEL=${COPILOT_MEM_OPENAI_COMPAT_MODEL:-qwen2.5-coder:7b}
+ENGINE=${COPILOT_MEM_ENGINE_DIR:-engine}   # plugin installs build into ~/.copilot-mem/engine
+export COPILOT_MEM_ENGINE_DIR=$ENGINE
 
 need() { command -v "$1" >/dev/null 2>&1 || { echo "✗ missing '$1' — install it from $2" >&2; exit 1; }; }
 need git     https://git-scm.com
@@ -21,19 +24,21 @@ need copilot "https://github.com/github/copilot-cli (npm i -g @github/copilot)"
 [ "$(uname)" = Darwin ] || echo "! not macOS: the network/file sandbox is macOS-only; settings locks still apply" >&2
 
 echo "→ fetching engine @ ${ENGINE_REV:0:7}"
-if [ ! -d engine/.git ]; then
-  git init -q engine
-  git -C engine remote add origin "$ENGINE_REPO"
+if [ ! -d "$ENGINE/.git" ]; then
+  mkdir -p "$ENGINE"
+  git init -q "$ENGINE"
+  git -C "$ENGINE" remote add origin "$ENGINE_REPO"
 fi
-git -C engine fetch -q --depth 1 origin "$ENGINE_REV"
-git -C engine checkout -q -f FETCH_HEAD
-git -C engine clean -fdq -e node_modules   # drop the previous rename/build
+git -C "$ENGINE" fetch -q --depth 1 origin "$ENGINE_REV"
+git -C "$ENGINE" checkout -q -f FETCH_HEAD
+git -C "$ENGINE" clean -fdq -e node_modules   # drop the previous rename/build
 
 echo "→ installing engine dependencies"
-(cd engine && bun install --frozen-lockfile >/dev/null)
+(cd "$ENGINE" && bun install --frozen-lockfile >/dev/null)
 
 echo "→ renaming, theming and building the engine"
-node rebrand-engine.mjs >/dev/null
+LOG=$(mktemp)
+node rebrand-engine.mjs >"$LOG" 2>&1 || { tail -30 "$LOG" >&2; echo "✗ engine build failed (full log: $LOG)" >&2; exit 1; }
 
 echo "→ pulling local model $MODEL (writes the memories)"
 ollama pull "$MODEL" 2>&1 | tail -1

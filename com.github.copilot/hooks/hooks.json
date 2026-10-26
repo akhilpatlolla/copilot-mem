@@ -1,0 +1,88 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook SessionStart",
+            "timeout": 90
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook UserPromptSubmit",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook PostToolUse",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook PostToolUseFailure",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook Stop",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook SubagentStop",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$COPILOT_PLUGIN_ROOT/copilot-mem.mjs\" hook SessionEnd",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

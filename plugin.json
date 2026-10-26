@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "copilot-mem",
+  "version": "1.0.0",
+  "description": "Persistent, 100% local memory for GitHub Copilot CLI: records prompts, tool calls and turn summaries, compresses them with a local Ollama model, and brings relevant history into new sessions. Sandboxed to loopback-only network.",
+  "author": {
+    "name": "Akhil Reddy Patlolla",
+    "url": "https://github.com/akhilpatlolla"
+  },
+  "homepage": "https://github.com/akhilpatlolla/copilot-mem",
+  "repository": "https://github.com/akhilpatlolla/copilot-mem",
+  "license": "Apache-2.0",
+  "keywords": ["memory", "context", "hooks", "local-first", "privacy", "ollama", "session-history"]
+}
